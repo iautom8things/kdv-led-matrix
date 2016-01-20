@@ -1,12 +1,4 @@
-#include <StandardCplusplus.h>
-#include <system_configuration.h>
-#include <unwind-cxx.h>
-#include <utility.h>
-
-#include "FastLED.h"
-#include <vector>
-using namespace std;
-
+#include "Column.h"
 
 #define HEIGHT 6
 #define WIDTH 20
@@ -14,27 +6,6 @@ using namespace std;
 #define PIN_OUT 10
 
 CRGB leds[NUM_LEDS];
-
-class Column {
-public:
-
-  Column(vector<CRGB*>* _pixels) {
-    pixels = *_pixels;
-  }
-
-  Column(vector<CRGB*>& _pixels) {
-    pixels = _pixels;
-  }
-
-  vector<CRGB*>& getPixels () { return pixels; }
-  void clear () {
-    for(int i = 0; i < pixels.size(); i++) {
-      pixels[i]->setRGB(0,0,0);
-    }
-  }
-private:
-  vector<CRGB*> pixels;
-};
 
 vector<Column*> columns;
 
