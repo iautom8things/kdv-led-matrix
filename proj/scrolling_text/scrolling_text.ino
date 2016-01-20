@@ -81,6 +81,6 @@ void loop() {
       FastLED.show();
       columns[right]->clear();
       FastLED.show();
-      delay(500);
+      delay(100);
     
 }
