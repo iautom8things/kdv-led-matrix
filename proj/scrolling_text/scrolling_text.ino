@@ -5,6 +5,7 @@
 
 #include "FastLED.h"
 #include <vector>
+using namespace std;
 
 
 #define HEIGHT 6
@@ -17,31 +18,31 @@ CRGB leds[NUM_LEDS];
 class Column {
 public:
 
-  Column(std::vector<CRGB*>* _pixels) {
+  Column(vector<CRGB*>* _pixels) {
     pixels = *_pixels;
   }
 
-  Column(std::vector<CRGB*>& _pixels) {
+  Column(vector<CRGB*>& _pixels) {
     pixels = _pixels;
   }
 
-  std::vector<CRGB*>& getPixels () { return pixels; }
+  vector<CRGB*>& getPixels () { return pixels; }
   void clear () {
     for(int i = 0; i < pixels.size(); i++) {
       pixels[i]->setRGB(0,0,0);
     }
   }
 private:
-  std::vector<CRGB*> pixels;
+  vector<CRGB*> pixels;
 };
 
-std::vector<Column*> columns;
+vector<Column*> columns;
 
 void setup() {
   FastLED.addLeds<WS2811, PIN_OUT>(leds, NUM_LEDS);
 
   for(int c = 0; c < WIDTH; c++) {
-    std::vector<CRGB*> *column = new std::vector<CRGB*>();
+    vector<CRGB*> *column = new vector<CRGB*>();
     for(int r = 0; r < HEIGHT; r++) {
       if (r % 2 != 0) {
         column->push_back(&(leds[(1+r)*WIDTH-(c+1)]));
@@ -61,8 +62,8 @@ void loop() {
 
     for(int right = WIDTH-1; right > 0; right--) {
       int left = (WIDTH+right-1) % WIDTH;
-      std::vector<CRGB*> from = columns[right]->getPixels();
-      std::vector<CRGB*>   to = columns[left]->getPixels();
+      vector<CRGB*> from = columns[right]->getPixels();
+      vector<CRGB*>   to = columns[left]->getPixels();
       for(int i = 0; i < HEIGHT; i++) {
         *to[i] = *from[i];
       }
@@ -73,8 +74,8 @@ void loop() {
     }
       int left = 19;
       int right = 0;
-      std::vector<CRGB*> from = columns[right]->getPixels();
-      std::vector<CRGB*>   to = columns[left]->getPixels();
+      vector<CRGB*> from = columns[right]->getPixels();
+      vector<CRGB*>   to = columns[left]->getPixels();
       for(int i = 0; i < HEIGHT; i++) {
         *to[i] = *from[i];
       }
