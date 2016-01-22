@@ -23,8 +23,34 @@ void Screen::scrollLeft()
 
   }
   columns[last_idx]->clear();
+  FastLED.show();
+}
+
+void Screen::push(Column* _column)
+{
+  scrollLeft();
+  int last_idx = columns.size()-1;
+  columns[last_idx]->draw(_column);
+  FastLED.show();
+}
+
+void Screen::emptyLeft(int _delay)
+{
+  for(int i = 0; i < columns.size(); i++) {
+    scrollLeft();
+    delay(_delay);
+  }
 }
 
 void Screen::scrollRight()
 {
+}
+
+void Screen::scroll(Scrollable _scrollable, int _delay)
+{
+  push(_scrollable.next());
+  delay(_delay);
+  push(_scrollable.next());
+  delay(_delay);
+  emptyLeft(_delay);
 }
