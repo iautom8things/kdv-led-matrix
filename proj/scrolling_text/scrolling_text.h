@@ -10,4 +10,7 @@
 #include "FastLED.h"
 using namespace std;
 
+#include "Column.h"
+#include "Screen.h"
+
 #endif

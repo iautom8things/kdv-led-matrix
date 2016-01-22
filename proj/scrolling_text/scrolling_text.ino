@@ -1,4 +1,4 @@
-#include "Column.h"
+#include "scrolling_text.h"
 
 #define HEIGHT 6
 #define WIDTH 20
@@ -8,6 +8,8 @@
 CRGB leds[NUM_LEDS];
 
 vector<Column*> columns;
+
+Screen *pScreen;
 
 void setup() {
   FastLED.addLeds<WS2811, PIN_OUT>(leds, NUM_LEDS);
@@ -33,6 +35,8 @@ void setup() {
   leds[60] = CRGB::Green;
   leds[99] = CRGB::Brown;
   leds[100]= CRGB::Orange;
+
+  pScreen = new Screen(columns);
 }
 
 void loop() {
@@ -64,6 +68,18 @@ void loop() {
   FastLED.show();
   columns[right]->clear();
   FastLED.show();
-  delay(100);
+  delay(500);
 
+  pScreen->clear();
+  FastLED.show();
+  delay(500);
+  // seed some initial colors on the far right
+  leds[19] = CRGB::Red;
+  leds[20] = CRGB::Blue;
+  leds[59] = CRGB::Violet;
+  leds[60] = CRGB::Green;
+  leds[99] = CRGB::Brown;
+  leds[100]= CRGB::Orange;
+  FastLED.show();
+  delay(500);
 }
