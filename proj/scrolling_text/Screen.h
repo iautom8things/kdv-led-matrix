@@ -8,6 +8,8 @@ public:
     Screen(vector<Column*> _columns);
 
     void clear();
+    void scrollLeft();
+    void scrollRight();
 
 private:
     vector<Column*> columns;

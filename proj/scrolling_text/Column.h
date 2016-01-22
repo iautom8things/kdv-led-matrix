@@ -9,10 +9,13 @@ class Column {
   Column(vector<CRGB*>* _pixels);
   Column(vector<CRGB*>& _pixels);
 
-  vector<CRGB*>& getPixels ();
-  void clear ();
+  vector<CRGB*>* getPixels();
+  void clear();
+  void draw(Column* other);
+  CRGB* operator[](int idx);
+  int size();
 
   private:
-  vector<CRGB*> pixels;
+  vector<CRGB*>* pixels;
 };
 #endif
