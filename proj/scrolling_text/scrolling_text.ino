@@ -85,37 +85,41 @@ void loop() {
   leds[99] = CRGB::Brown;
   leds[100]= CRGB::Orange;
   FastLED.show();
-  delay(500);
+  delay(50);
   Column lastColumn = *columns[19];
   for (int i = 0; i < lastColumn.size(); i++) {
     *lastColumn[i] = CRGB::Red;
     FastLED.show();
-    delay(500);
+    delay(50);
   }
 
   vector<Column*> scrollable_columns;
   vector<CRGB*> c1;
-  c1.push_back(new CRGB(123,123,23));
-  c1.push_back(new CRGB(0,0,0));
-  c1.push_back(new CRGB(123,123,23));
-  c1.push_back(new CRGB(0,0,0));
-  c1.push_back(new CRGB(123,123,23));
-  c1.push_back(new CRGB(0,0,0));
-  scrollable_columns.push_back(new Column(&c1));
+  CRGB* gray = new CRGB(123,123,23);
+  CRGB* black = new CRGB(0,0,0);
+  c1.push_back(gray);
+  c1.push_back(black);
+  c1.push_back(gray);
+  c1.push_back(black);
+  c1.push_back(gray);
+  c1.push_back(black);
+  Column* realC1 = new Column(&c1);
+  scrollable_columns.push_back(realC1);
   vector<CRGB*> c2;
 
-  c2.push_back(new CRGB(123,123,23));
-  c2.push_back(new CRGB(0,0,0));
-  c2.push_back(new CRGB(0,0,0));
-  c2.push_back(new CRGB(0,0,0));
-  c2.push_back(new CRGB(0,0,0));
-  c2.push_back(new CRGB(123,123,23));
-  scrollable_columns.push_back(new Column(&c2));
+  c2.push_back(gray);
+  c2.push_back(black);
+  c2.push_back(black);
+  c2.push_back(black);
+  c2.push_back(black);
+  c2.push_back(gray);
+  Column* realC2 = new Column(&c2);
+  scrollable_columns.push_back(realC2);
 
   Scrollable myScrollable = Scrollable(scrollable_columns);
 
-  pScreen->scroll(myScrollable,500);
-  delay(500);
+  pScreen->scroll(myScrollable,50);
+  delay(50);
 
   leds[19] = CRGB::Blue;
   leds[20] = CRGB::Blue;
@@ -124,5 +128,9 @@ void loop() {
   leds[99] = CRGB::Blue;
   leds[100]= CRGB::Blue;
   FastLED.show();
-  delay(500);
+  delay(50);
+  free(gray);
+  free(black);
+  free(realC1);
+  free(realC2);
 }
