@@ -12,5 +12,6 @@ using namespace std;
 
 #include "Column.h"
 #include "Screen.h"
+#include "Scrollable.h"
 
 #endif
