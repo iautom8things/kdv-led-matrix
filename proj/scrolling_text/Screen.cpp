@@ -48,9 +48,11 @@ void Screen::scrollRight()
 
 void Screen::scroll(Scrollable _scrollable, int _delay)
 {
-  push(_scrollable.next());
-  delay(_delay);
-  push(_scrollable.next());
-  delay(_delay);
+  Column* nextCol;
+  for(;!_scrollable.done(); nextCol = _scrollable.next())
+  {
+    push(nextCol);
+    delay(_delay);
+  }
   emptyLeft(_delay);
 }
