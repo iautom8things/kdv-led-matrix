@@ -12,6 +12,7 @@ Adafruit_NeoMatrix matrix = Adafruit_NeoMatrix(20, 6, 10,
 
 const uint16_t colors[] = {
   matrix.Color(96, 15, 151), matrix.Color(6, 188, 64), matrix.Color(248, 182, 25) };
+const uint8_t num_colors = sizeof(colors)/sizeof(colors[0]);
 
 void setup() {
   matrix.begin();
