@@ -89,5 +89,6 @@ void print_string (String string) {
 void loop() {
   matrix.fillScreen(0);
   matrix.setCursor(x, 1);
+  matrix.setTextColor(colors[random(num_colors)]);
   print_string(sayings[say_idx]);
 }
