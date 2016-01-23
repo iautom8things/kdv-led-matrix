@@ -25,6 +25,16 @@ void setup() {
 int x    = matrix.width();
 int pass = 0;
 
+String sayings[] = {
+  "SPANK ME MISTER",
+  "KREWE OF CHAD",
+  "KDV XXX",
+  "DONT TREAD ON MY TARP BRO",
+  "KREWE OF SPANK",
+};
+uint8_t say_idx = 0;
+const uint8_t num_sayings = sizeof(sayings)/sizeof(sayings[0]);
+
 uint32_t Wheel(byte WheelPos) {
   if(WheelPos < 85) {
     return matrix.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
