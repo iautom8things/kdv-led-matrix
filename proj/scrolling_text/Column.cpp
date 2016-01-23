@@ -1,44 +1,65 @@
 #include "Column.h"
 
+Column::Column()
+{
+  ownsVector = true;
+  pixels = new vector<CRGB*>();
+}
+
 Column::Column(vector<CRGB*>* _pixels)
 {
+  ownsVector = false;
   pixels = _pixels;
 }
 
-Column::Column(vector<CRGB*>& _pixels)
+Column::~Column()
 {
-  pixels = &_pixels;
+  if (ownsVector)
+  {
+    pixels->clear();
+    delete pixels;
+  }
 }
 
-vector<CRGB*>* Column::getPixels ()
-{
-  return pixels;
-}
-
-void Column::clear ()
+void Column::clear()
 {
   for (int i = 0; i < pixels->size(); i++)
   {
-    vector<CRGB*> thePixels = *pixels;
-    CRGB* pPixel = thePixels[i];
-    pPixel->setRGB(0,0,0);
+    //vector<CRGB*> thePixels = *pixels;
+    //CRGB* pPixel = thePixels[i];
+    //pPixel->setRGB(0,0,0);
+    pixels->at(i)->setRGB(0,0,0);
   }
 }
 
 void Column::draw(Column* other)
 {
-  Column otherColumn = *other;
-  vector<CRGB*> thisPixels = *pixels;
-  for(int i = 0; i < otherColumn.size(); i++)
+  Serial.println("draw");
+  Serial.print("Free memory: ");
+  Serial.println(freeMemory());
+  if (size() != other->size()) {
+    Serial.println("Size mismatch!");
+    Serial.print("This Column size: ");
+    Serial.print(size());
+    Serial.print("Other Column Size: ");
+    Serial.println(other->size());
+    return;
+  }
+
+  for(int i = 0; i < size(); i++)
   {
-    *(thisPixels[i]) = *(otherColumn[i]);
+    CRGB *thisPixel = getPixel(i);
+    CRGB *otherPixel = other->getPixel(i);
+
+    thisPixel->r = otherPixel->r;
+    thisPixel->g = otherPixel->g;
+    thisPixel->b = otherPixel->b;
   }
 }
 
-CRGB* Column::operator[](int idx)
+CRGB* Column::getPixel(int idx)
 {
-  vector<CRGB*> thePixels = *pixels;
-  return thePixels[idx];
+  return pixels->at(idx);
 }
 
 int Column::size()

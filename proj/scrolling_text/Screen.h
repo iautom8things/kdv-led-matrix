@@ -6,17 +6,18 @@
 
 class Screen {
 public:
-    Screen(vector<Column*> _columns);
+    Screen(vector<Column*>* _columns);
 
     void clear();
     void scrollLeft();
     void emptyLeft(int _delay);
     void scrollRight();
 
-    void scroll(Scrollable _scrollable, int _delay);
+    void scroll(Scrollable* _scrollable, int _delay);
+    void scrollMany(vector<Scrollable*> _scrollables, int _delay, int _numSpaces);
     void push(Column* _column);
 
 private:
-    vector<Column*> columns;
+    vector<Column*>* columns;
 };
 #endif

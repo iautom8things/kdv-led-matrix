@@ -7,11 +7,14 @@
 #include <utility.h>
 
 #include <vector>
+#include <string>
 #include "FastLED.h"
 using namespace std;
 
 #include "Column.h"
 #include "Screen.h"
 #include "Scrollable.h"
+#include "ScrollableFactory.h"
+#include "MemoryFree.h"
 
 #endif
