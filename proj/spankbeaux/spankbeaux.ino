@@ -89,13 +89,5 @@ void print_string (String string) {
 void loop() {
   matrix.fillScreen(0);
   matrix.setCursor(x, 1);
-  matrix.print(F("SPANK"));
-  if(--x < -25) {
-    x = matrix.width();
-    if(++pass >= 3) pass = 0;
-    matrix.setTextColor(colors[pass]);
-  rainbow(20);
-  }
-  matrix.show();
-  delay(100);
+  print_string(sayings[say_idx]);
 }
