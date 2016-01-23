@@ -74,6 +74,18 @@ void rainbow(uint8_t wait) {
   }
 }
 
+void print_string (String string) {
+  int scroll_length = -6*string.length();
+  matrix.print(string);
+  if(--x < scroll_length) {
+    x = matrix.width();
+    rainbow(20);
+    say_idx = random(num_sayings);
+  }
+  matrix.show();
+  delay(100);
+}
+
 void loop() {
   matrix.fillScreen(0);
   matrix.setCursor(x, 1);
